@@ -21,6 +21,7 @@ build:
       ACTIONS_CACHE_SERVICE_V2: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
       ACTIONS_RESULTS_URL: '${{ env.get("ACTIONS_RESULTS_URL", default="") }}'
       ACTIONS_RUNTIME_TOKEN: '${{ env.get("ACTIONS_RUNTIME_TOKEN", default="") }}'
+      SCCACHE_GHA_ENABLED: '${{ env.get("SCCACHE_GHA_ENABLED", default="") }}'
     content:
       - sccache --show-stats
 

@@ -7,6 +7,8 @@ jobs:
   build-x64:
     name: Build conda
     runs-on: "${{ matrix.os }}"
+    env:
+      SCCACHE_GHA_ENABLED: "true"
     strategy:
       matrix:
         os:
