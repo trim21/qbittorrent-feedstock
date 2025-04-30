@@ -23,7 +23,8 @@ build:
         -D GUI=OFF \
         -DCMAKE_INSTALL_PREFIX=$PREFIX \
         .
-      ninja install
+
+    - ninja install
 
 requirements:
   build:
@@ -31,7 +32,7 @@ requirements:
     - boost>=1.84.0
     - cmake
     - openssl
-    - qt6-main>=6.5.2,<6.7.0
+    - qt6-main==6.6.3
     - "${{ compiler('cxx') }}"
     - zlib
     - libtorrent-static
@@ -43,7 +44,7 @@ requirements:
 
   run:
     - openssl
-    - qt6-main>=6.5.2,<6.7.0
+    - qt6-main==6.6.3
     - zlib
 
 tests:

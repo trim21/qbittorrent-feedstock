@@ -23,7 +23,8 @@ build:
         -D BUILD_SHARED_LIBS=OFF \
         -DCMAKE_INSTALL_PREFIX=$PREFIX \
         .
-      ninja install
+
+    - ninja install
 
 requirements:
   build:
