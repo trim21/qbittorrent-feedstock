@@ -30,12 +30,14 @@ build:
 requirements:
   build:
     - "${{ compiler('c') }}"
-    - boost>=1.84.0
     - ninja
     - cmake
+    - "${{ compiler('cxx') }}"
+
+  host:
+    - boost>=1.84.0
     - openssl>=3.0.0
     - qt6-main==6.6.3
-    - "${{ compiler('cxx') }}"
     - zlib>=1.2.11
     - libtorrent-static
 
