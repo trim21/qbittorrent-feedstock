@@ -3,16 +3,16 @@
 schema_version: 1
 
 context:
-  name: qbittorrent-nox
-  version: "5.0.2"
+  name: libtorrent-static
+  version: "2.0.11"
 
 package:
   name: "${{ name }}"
   version: "${{ version }}"
 
 source:
-  url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
-  sha256: ba46f7ac0c530ab6ba81fdce6f4488393cd67dd1a9d823660e26081773569274
+  url: "https://github.com/arvidn/libtorrent/releases/download/v${{ version }}/libtorrent-rasterbar-${{ version }}.tar.gz"
+  sha256: f0db58580f4f29ade6cc40fa4ba80e2c9a70c90265cd77332d3cdec37ecf1e6d
 
 build:
   number: 0
@@ -21,8 +21,7 @@ build:
       - |
         cmake ${CMAKE_ARGS} \
           -G "Ninja" \
-          -D TESTING=OFF \
-          -D GUI=OFF \
+          -D BUILD_SHARED_LIBS=OFF \
           .
 
       - ninja install
@@ -30,17 +29,10 @@ build:
 requirements:
   build:
     - "${{ compiler('c') }}"
-    - ninja
     - cmake
+    - ninja
     - "${{ compiler('cxx') }}"
 
   host:
     - boost>=1.84.0
     - openssl>=3.0.0
-    - qt6-main>=6.7,<6.8.0a0
-    - zlib>=1.2.11
-    - libtorrent-static
-
-tests:
-  - script:
-      - qbittorrent-nox --help
