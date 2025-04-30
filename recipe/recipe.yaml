@@ -32,15 +32,15 @@ requirements:
     - "${{ compiler('c') }}"
     - boost>=1.84.0
     - cmake
-    - openssl
+    - openssl>=3.0.0
     - qt6-main==6.6.3
     - "${{ compiler('cxx') }}"
-    - zlib
+    - zlib>=1.2.11
     - libtorrent-static
 
   host:
-    - openssl
-    - zlib
+    - openssl>=3.0.0
+    - zlib>=1.2.11
     - libtorrent-static
 
   run:
