@@ -44,9 +44,9 @@ requirements:
     - libtorrent-static
 
   run:
-    - ${{ pin_subpackage("openssl", exact=True) }}
-    - ${{ pin_subpackage("qt6-main", exact=True) }}
-    - ${{ pin_subpackage("zlib", exact=True) }}
+    - ${{ pin_compatible("openssl", exact=True) }}
+    - ${{ pin_compatible("qt6-main", exact=True) }}
+    - ${{ pin_compatible("zlib", exact=True) }}
 
 tests:
   - script:
