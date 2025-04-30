@@ -10,30 +10,46 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # sleep some time before we build packages
-  # channel may still processing newly uploaded package
-  # give they some time,
-  # so rattler-build can see packages in repodata.json
-  sleep:
-    runs-on: "ubuntu-24.04"
-    steps:
-      - run: sleep 1
-
-  conda:
-    needs: sleep
-    uses: ./.github/workflows/_build_conda.yaml
-
   upload-conda:
     name: Upload packages to Conda
-    needs: [conda]
     permissions:
       id-token: write
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Install the latest Wasmer version
+        uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2 # v2.1.0
         with:
-          pattern: conda-*
-          path: dist
-          merge-multiple: true
+          repo: prefix-dev/rattler-build
+          tag: "v0.41.0"
+
+      - run: |
+          rattler-build build \
+            --wrap-log-lines=false \
+            --log-style=plain \
+            --skip-existing=all \
+            --output-dir=./output \
+            --channel=https://repo.prefix.dev/bit-torrent \
+            --verbose \
+            --recipe-dir=packages/libtorrent-static
+        shell: bash
+      - run: |
+          find ./output/ -type f -name 'libtorrent-static-*.conda' | xargs rattler-build upload prefix -c bit-torrent
+
+      - run: sleep 60
+
+      - run: rm output -rf
+
+      - run: |
+          rattler-build build \
+            --wrap-log-lines=false \
+            --log-style=plain \
+            --skip-existing=all \
+            --output-dir=./output \
+            --channel=https://repo.prefix.dev/bit-torrent \
+            --verbose \
+            --recipe-dir=recipe
+
+      - run: |
+          find ./output/ -type f -name 'qbittorrent-nox-*.conda' | xargs rattler-build upload prefix -c bit-torrent
