@@ -34,8 +34,6 @@ requirements:
     - ninja
     - openssl
     - "${{ compiler('cxx') }}"
-  host:
-    - openssl
 
   run:
     - ${{ pin_compatible("boost", lower_bound="x.x", upper_bound="x.x") }}

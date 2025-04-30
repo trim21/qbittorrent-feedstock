@@ -39,11 +39,6 @@ requirements:
     - zlib>=1.2.11
     - libtorrent-static
 
-  # host:
-  #   - openssl>=3.0.0
-  #   - zlib>=1.2.11
-  #   - libtorrent-static
-
   run:
     - ${{ pin_compatible("openssl", lower_bound="x", upper_bound="x") }}
     - ${{ pin_compatible("qt6-main", lower_bound="x.x.x", upper_bound="x.x.x") }}
