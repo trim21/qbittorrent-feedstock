@@ -17,32 +17,25 @@ source:
 build:
   number: 0
   script:
-    env:
-      ACTIONS_CACHE_SERVICE_V2: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
-      ACTIONS_RESULTS_URL: '${{ env.get("ACTIONS_RESULTS_URL", default="") }}'
-      ACTIONS_RUNTIME_TOKEN: '${{ env.get("ACTIONS_RUNTIME_TOKEN", default="") }}'
-      SCCACHE_GHA_ENABLED: '${{ env.get("SCCACHE_GHA_ENABLED", default="") }}'
     content:
-      - sccache --show-stats
-
       - |
         cmake ${CMAKE_ARGS} -G "Ninja" \
           -D BUILD_SHARED_LIBS=OFF \
           -DCMAKE_INSTALL_PREFIX=$PREFIX \
-          -DCMAKE_C_COMPILER_LAUNCHER=sccache \
-          -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
           .
 
       - ninja install
-      - sccache --show-stats
 
 requirements:
   build:
     - "${{ compiler('c') }}"
     - boost>=1.84.0
     - cmake
-    - sccache
     - openssl
     - "${{ compiler('cxx') }}"
   host:
     - openssl
+
+  run:
+   - ${{ pin("boost") }}
+   - ${{ pin("openssl") }}
