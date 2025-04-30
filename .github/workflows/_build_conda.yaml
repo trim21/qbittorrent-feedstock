@@ -21,6 +21,9 @@ jobs:
           repo: prefix-dev/rattler-build
           tag: "v0.41.0"
 
+      - name: Run sccache-cache
+        uses: mozilla-actions/sccache-action@v0.0.9
+
       - run: |
           rattler-build build \
             --wrap-log-lines=false \

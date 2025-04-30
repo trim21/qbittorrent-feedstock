@@ -22,6 +22,8 @@ build:
         -D TESTING=OFF \
         -D GUI=OFF \
         -DCMAKE_INSTALL_PREFIX=$PREFIX \
+        -DCMAKE_C_COMPILER_LAUNCHER=sccache \
+        -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
         .
 
     - ninja install
@@ -35,6 +37,7 @@ requirements:
     - qt6-main==6.6.3
     - "${{ compiler('cxx') }}"
     - zlib
+    - sccache
     - libtorrent-static
 
   host:

@@ -22,6 +22,8 @@ build:
         -D BUILD_TESTING=OFF \
         -D BUILD_SHARED_LIBS=OFF \
         -DCMAKE_INSTALL_PREFIX=$PREFIX \
+        -DCMAKE_C_COMPILER_LAUNCHER=sccache \
+        -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
         .
 
     - ninja install
@@ -31,6 +33,7 @@ requirements:
     - "${{ compiler('c') }}"
     - boost>=1.84.0
     - cmake
+    - sccache
     - openssl
     - "${{ compiler('cxx') }}"
   host:
