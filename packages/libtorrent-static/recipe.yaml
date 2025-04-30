@@ -37,5 +37,5 @@ requirements:
     - openssl
 
   run:
-   - ${{ pin("boost") }}
-   - ${{ pin("openssl") }}
+   - ${{ pin_subpackage("boost", exact=True) }}
+   - ${{ pin_subpackage("openssl", exact=True) }}
