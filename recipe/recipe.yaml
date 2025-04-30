@@ -13,6 +13,7 @@ package:
 source:
   git: https://github.com/qbittorrent/qBittorrent
   tag: release-${{ version }}
+  depth: 1
 
 build:
   number: 0
