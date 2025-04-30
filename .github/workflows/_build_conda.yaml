@@ -16,12 +16,9 @@ jobs:
           pixi run rattler-build build \
             --wrap-log-lines=false \
             --log-style=plain \
-            --skip-existing=all \
-            --channel=conda-forge \
             --output-dir=./output \
             --verbose \
-            --variant-config=variants.yaml \
-            --recipe-dir=packages
+            --recipe-dir=recipe
         shell: bash
 
       - run: ls ./output/
