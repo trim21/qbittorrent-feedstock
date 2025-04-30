@@ -18,9 +18,9 @@ build:
   number: 0
   script:
     env:
-      - ACTIONS_CACHE_SERVICE_V2
-      - ACTIONS_RESULTS_URL
-      - ACTIONS_RUNTIME_TOKEN
+      ACTIONS_CACHE_SERVICE_V2: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
+      ACTIONS_RESULTS_URL: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
+      ACTIONS_RUNTIME_TOKEN: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
     content:
       - |
         cmake ${CMAKE_ARGS} -G "Ninja" \
