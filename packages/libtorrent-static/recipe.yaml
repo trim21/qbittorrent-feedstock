@@ -17,16 +17,21 @@ source:
 build:
   number: 0
   script:
-    - |
-      cmake ${CMAKE_ARGS} -G "Ninja" \
-        -D BUILD_TESTING=OFF \
-        -D BUILD_SHARED_LIBS=OFF \
-        -DCMAKE_INSTALL_PREFIX=$PREFIX \
-        -DCMAKE_C_COMPILER_LAUNCHER=sccache \
-        -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
-        .
+    env:
+      - ACTIONS_CACHE_SERVICE_V2
+      - ACTIONS_RESULTS_URL
+      - ACTIONS_RUNTIME_TOKEN
+    content:
+      - |
+        cmake ${CMAKE_ARGS} -G "Ninja" \
+          -D BUILD_TESTING=OFF \
+          -D BUILD_SHARED_LIBS=OFF \
+          -DCMAKE_INSTALL_PREFIX=$PREFIX \
+          -DCMAKE_C_COMPILER_LAUNCHER=sccache \
+          -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
+          .
 
-    - ninja install
+      - ninja install
 
 requirements:
   build:
