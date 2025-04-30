@@ -22,6 +22,8 @@ build:
       ACTIONS_RESULTS_URL: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
       ACTIONS_RUNTIME_TOKEN: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
     content:
+      - sccache --show-stats
+
       - |
         cmake ${CMAKE_ARGS} -G "Ninja" \
           -D TESTING=OFF \
