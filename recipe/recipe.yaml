@@ -12,7 +12,7 @@ package:
 
 source:
   git: https://github.com/qbittorrent/qBittorrent
-  tag: release-${{ version }}
+  tag: 'release-${{ version }}'
   depth: 1
 
 build:
