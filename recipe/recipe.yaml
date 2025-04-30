@@ -11,42 +11,57 @@ package:
   version: "${{ version }}"
 
 source:
-  url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
+  - url: "https://github.com/arvidn/libtorrent/releases/download/v2.0.11/libtorrent-rasterbar-2.0.11.tar.gz"
+    target_directory: libtorrent
+    sha256: f0db58580f4f29ade6cc40fa4ba80e2c9a70c90265cd77332d3cdec37ecf1e6d
+
+  - url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
+    sha256: ba46f7ac0c530ab6ba81fdce6f4488393cd67dd1a9d823660e26081773569274
+    target_directory: qbittorrent
 
 build:
   number: 0
   script:
-    - if: win
-      then: |
-        cmake -G "Ninja" -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% %SRC_DIR%
-        ninja install
-      else: |
-        cmake ${CMAKE_ARGS} -G "Ninja" -DBUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX $SRC_DIR -DCMAKE_INSTALL_LIBDIR=lib
-        ninja install
+    - |
+      pushd libtorrent
+      cmake ${CMAKE_ARGS} -G "Ninja" \
+        -D BUILD_TESTING=OFF \
+        -D BUILD_SHARED_LIBS=OFF \
+        -DCMAKE_INSTALL_PREFIX=$PREFIX \
+        .
+      ninja install
+      popd
+
+    - |
+      pushd qbittorrent
+      cmake ${CMAKE_ARGS} -G "Ninja" \
+        -D TESTING=OFF \
+        -D GUI=OFF \
+        -DCMAKE_INSTALL_PREFIX=$PREFIX \
+        .
+      ninja install
+      popd
 
 requirements:
   build:
-    - "cargo-bundle-licenses"
     - "${{ compiler('c') }}"
-    - boost>=1.87.0
+    - boost>=1.84.0
     - cmake
-    - qt6>=6.5.2
-    - "${{ stdlib('c') }}"
-    - "${{ compiler('c++') }}"
-    - make
+    - openssl
+    - qt6-main>=6.5.2,<6.7.0
+    - "${{ compiler('cxx') }}"
+    - zlib
+
+  host:
+    - openssl
+    - zlib
 
 tests:
-  - python:
-      imports:
-        - ruff
   - script:
-      - ruff --help
+      - qbittorrent-nox --help
 
 about:
   license: MIT
-  license_file:
-    - LICENSE
-    - THIRDPARTY.yml
   summary: An extremely fast Python linter, written in Rust.
   # The remaining entries in this section are optional, but recommended.
   description: |
@@ -56,11 +71,3 @@ about:
     hundreds of times faster than any individual tool.
   homepage: https://github.com/astral-sh/ruff
   repository: https://github.com/astral-sh/ruff
-
-extra:
-  recipe-maintainers:
-    - dhruvmanila
-    - ntBre
-    - zanieb
-    - messense
-    - charliermarsh
