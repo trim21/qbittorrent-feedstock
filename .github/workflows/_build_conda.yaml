@@ -4,16 +4,23 @@ on:
   workflow_call:
 
 jobs:
-  build:
+  build-x64:
     name: Build conda
-    runs-on: ubuntu-24.04
+    runs-on: "${{ matrix.os }}"
+    strategy:
+      matrix:
+        os: ["ubuntu-24.04", "ubuntu-24.04-arm"]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-      - uses: prefix-dev/setup-pixi@19eac09b398e3d0c747adc7921926a6d802df4da # v0.8.8
+      - name: Install the latest Wasmer version
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        with:
+          repo: prefix-dev/rattler-build
+          tag: "v0.41.0"
 
       - run: |
-          pixi run rattler-build build \
+          rattler-build build \
             --wrap-log-lines=false \
             --log-style=plain \
             --output-dir=./output \
@@ -25,6 +32,5 @@ jobs:
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: "conda-noarch"
-          path: ./output/noarch/*.conda
-          if-no-files-found: ignore
+          name: "conda-${{ matrix.os }}"
+          path: ./output/*/*.conda
