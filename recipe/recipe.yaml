@@ -19,10 +19,10 @@ build:
   script:
     content:
       - |
-        cmake ${CMAKE_ARGS} -G "Ninja" \
+        cmake ${CMAKE_ARGS} \
+          -G "Ninja" \
           -D TESTING=OFF \
           -D GUI=OFF \
-          -DCMAKE_INSTALL_PREFIX=$PREFIX \
           .
 
       - ninja install
@@ -31,6 +31,7 @@ requirements:
   build:
     - "${{ compiler('c') }}"
     - boost>=1.84.0
+    - ninja
     - cmake
     - openssl>=3.0.0
     - qt6-main==6.6.3

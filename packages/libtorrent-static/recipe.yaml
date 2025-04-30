@@ -19,9 +19,9 @@ build:
   script:
     content:
       - |
-        cmake ${CMAKE_ARGS} -G "Ninja" \
+        cmake ${CMAKE_ARGS} \
+          -G "Ninja" \
           -D BUILD_SHARED_LIBS=OFF \
-          -DCMAKE_INSTALL_PREFIX=$PREFIX \
           .
 
       - ninja install
@@ -31,6 +31,7 @@ requirements:
     - "${{ compiler('c') }}"
     - boost>=1.84.0
     - cmake
+    - ninja
     - openssl
     - "${{ compiler('cxx') }}"
   host:
