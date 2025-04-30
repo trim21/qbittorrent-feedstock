@@ -19,8 +19,8 @@ build:
   script:
     env:
       ACTIONS_CACHE_SERVICE_V2: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
-      ACTIONS_RESULTS_URL: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
-      ACTIONS_RUNTIME_TOKEN: '${{ env.get("ACTIONS_CACHE_SERVICE_V2", default="") }}'
+      ACTIONS_RESULTS_URL: '${{ env.get("ACTIONS_RESULTS_URL", default="") }}'
+      ACTIONS_RUNTIME_TOKEN: '${{ env.get("ACTIONS_RUNTIME_TOKEN", default="") }}'
     content:
       - sccache --show-stats
 
@@ -34,6 +34,7 @@ build:
           .
 
       - ninja install
+      - sccache --show-stats
 
 requirements:
   build:
