@@ -1,0 +1,39 @@
+name: release
+
+on:
+  push:
+    branches:
+      - "master"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  # sleep some time before we build packages
+  # channel may still processing newly uploaded package
+  # give they some time,
+  # so rattler-build can see packages in repodata.json
+  sleep:
+    runs-on: "ubuntu-24.04"
+    steps:
+      - run: sleep 60
+
+  conda:
+    needs: sleep
+    uses: ./.github/workflows/_build_conda.yaml
+
+  upload-conda:
+    name: Upload packages to Conda
+    needs: [conda]
+    permissions:
+      id-token: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4
+        with:
+          pattern: conda-*
+          path: dist
+          merge-multiple: true

@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+
+schema_version: 1
+
+context:
+  name: qbittorrent-nox
+  version: "5.0.2"
+
+package:
+  name: "${{ name }}"
+  version: "${{ version }}"
+
+source:
+  url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
+
+build:
+  number: 0
+  script:
+    - if: win
+      then: |
+        cmake -G "Ninja" -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% %SRC_DIR%
+        ninja install
+      else: |
+        cmake ${CMAKE_ARGS} -G "Ninja" -DBUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX $SRC_DIR -DCMAKE_INSTALL_LIBDIR=lib
+        ninja install
+
+requirements:
+  build:
+    - "cargo-bundle-licenses"
+    - "${{ compiler('c') }}"
+    - boost>=1.87.0
+    - cmake
+    - qt6>=6.5.2
+    - "${{ stdlib('c') }}"
+    - "${{ compiler('c++') }}"
+    - make
+
+tests:
+  - python:
+      imports:
+        - ruff
+  - script:
+      - ruff --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: An extremely fast Python linter, written in Rust.
+  # The remaining entries in this section are optional, but recommended.
+  description: |
+    An extremely fast Python linter, written in Rust. Ruff can be used to
+    replace Flake8 (plus a variety of plugins), isort, pydocstyle, yesqa, and
+    even a subset of pyupgrade and autoflake all while executing tens or
+    hundreds of times faster than any individual tool.
+  homepage: https://github.com/astral-sh/ruff
+  repository: https://github.com/astral-sh/ruff
+
+extra:
+  recipe-maintainers:
+    - dhruvmanila
+    - ntBre
+    - zanieb
+    - messense
+    - charliermarsh
