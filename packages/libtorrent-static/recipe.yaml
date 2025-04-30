@@ -39,4 +39,4 @@ requirements:
 
   run:
     - ${{ pin_compatible("boost", lower_bound="x.x", upper_bound="x.x") }}
-    - ${{ pin_compatible("openssl", lower_bound="x", upper_bound="x") }}
+    - ${{ pin_compatible("openssl", lower_bound="x.x", upper_bound="x") }}
