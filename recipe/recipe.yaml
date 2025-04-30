@@ -37,7 +37,7 @@ requirements:
   host:
     - boost>=1.84.0
     - openssl>=3.0.0
-    - qt6-main>=6.8,<6.9.0a0
+    - qt6-main>=6.7,<6.8.0a0
     - zlib>=1.2.11
     - libtorrent-static
 
