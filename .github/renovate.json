@@ -3,18 +3,5 @@
   "extends": [
     "local>trim21/renovate-config",
     "local>trim21/renovate-config:app"
-  ],
-  "customManagers": [
-    {
-      "customType": "jsonata",
-      "fileMatch": [
-        "^packages/.*/recipe\\.yaml$"
-      ],
-      "fileFormat": "yaml",
-      "matchStrings": [
-        "[{'currentValue': context.version, 'packageName': context.name}]"
-      ],
-      "datasourceTemplate": "pypi"
-    }
   ]
 }
