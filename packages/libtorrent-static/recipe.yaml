@@ -29,11 +29,13 @@ build:
 requirements:
   build:
     - "${{ compiler('c') }}"
-    - boost>=1.84.0
     - cmake
     - ninja
-    - openssl
     - "${{ compiler('cxx') }}"
+
+  host:
+    - boost>=1.84.0
+    - openssl>=3.0.0
 
   run:
     - ${{ pin_compatible("boost", lower_bound="x.x", upper_bound="x.x") }}
