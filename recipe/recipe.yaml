@@ -44,15 +44,3 @@ requirements:
 tests:
   - script:
       - qbittorrent-nox --help
-
-about:
-  license: MIT
-  summary: An extremely fast Python linter, written in Rust.
-  # The remaining entries in this section are optional, but recommended.
-  description: |
-    An extremely fast Python linter, written in Rust. Ruff can be used to
-    replace Flake8 (plus a variety of plugins), isort, pydocstyle, yesqa, and
-    even a subset of pyupgrade and autoflake all while executing tens or
-    hundreds of times faster than any individual tool.
-  homepage: https://github.com/astral-sh/ruff
-  repository: https://github.com/astral-sh/ruff
