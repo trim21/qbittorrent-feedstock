@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
-  sha256: 12dc7228b6fd1f0c184e0fd58836797b9f01fd7da89c9ff65795a031eb571759
+  sha256: 6c1077e51be2189189c4a0ec99402ccc88a4f43d88d8dece721cbe508460dd4b
 
 build:
   number: 0
