@@ -45,7 +45,7 @@
       "matchFileNames": [
         "^packages/libtorrent-static v1/recipe\\.yaml$"
       ],
-      "matchDepTypes": [
+      "matchUpdateTypes": [
         "major"
       ],
       "enabled": false
