@@ -46,7 +46,7 @@ requirements:
     - openssl>=3.0.2
     - qt6-main 6.8.*
     - zlib>=1.2.11
-    - "libtorrent-static ${{ lt }}.*"
+    - "libtorrent-static ${{ lt }}.* [build_number=10]"
 
 tests:
   - script:
