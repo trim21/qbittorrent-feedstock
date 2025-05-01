@@ -18,9 +18,12 @@ build:
   number: 1
   script:
     content:
+      # QT_REQUIRE_HOST_PATH_CHECK is currently required to use qt6-main on aarch64
+      # see https://github.com/conda-forge/qt-main-feedstock/issues/273 for more details
       - |
         cmake ${CMAKE_ARGS} \
           -G "Ninja" \
+          -D QT_REQUIRE_HOST_PATH_CHECK=OFF \
           -D TESTING=OFF \
           -D GUI=OFF \
           .
@@ -38,7 +41,7 @@ requirements:
   host:
     - boost>=1.84.0
     - openssl>=3.0.2
-    - qt6-main>=6.7,<6.8.0a0
+    - qt6-main 6.8.*
     - zlib>=1.2.11
     - libtorrent-static
 
