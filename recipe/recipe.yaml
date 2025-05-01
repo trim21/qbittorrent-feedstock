@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ qb_version }}.tar.gz
-  sha256: '${{ qb_tarbar_sha256 }}'
+  sha256: "${{ qb_tarbar_sha256 }}"
 
 build:
   string: "lt${{ lt }}_${{ hash }}_2"
@@ -21,7 +21,14 @@ build:
     content:
       # QT_REQUIRE_HOST_PATH_CHECK is currently required to use qt6-main on aarch64
       # see https://github.com/conda-forge/qt-main-feedstock/issues/273 for more details
-      - cmake ${CMAKE_ARGS} -G "Ninja" -D QT_REQUIRE_HOST_PATH_CHECK=OFF -D TESTING=OFF -D GUI=OFF .
+      - |
+        cmake ${CMAKE_ARGS} \
+          -G "Ninja" \
+          -D QT_REQUIRE_HOST_PATH_CHECK=OFF \
+          -D TESTING=OFF \
+          -D GUI=OFF \
+          .
+
       - ninja install
 
 requirements:
