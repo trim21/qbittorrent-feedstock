@@ -58,14 +58,12 @@ jobs:
 
       - run: sudo rm /usr/bin/conda
 
-      - uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2 # v2.1.0
+      - uses: prefix-dev/setup-pixi@v0.8.8
         with:
-          repo: prefix-dev/pixi
-          tag: "v0.46.0"
+          run-install: false
 
       - run: pixi global install conda --with conda-index
       - run: conda index --verbose --threads=4 output
-      - run: which conda
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
