@@ -9,6 +9,9 @@ jobs:
     runs-on: "${{ matrix.os }}"
     strategy:
       matrix:
+        version:
+          - "1"
+          - "2"
         os:
           - "ubuntu-24.04"
           - "ubuntu-24.04-arm"
@@ -29,24 +32,44 @@ jobs:
             --channel=conda-forge \
             --channel=https://repo.prefix.dev/bit-torrent \
             --verbose \
-            --recipe-dir=packages/libtorrent
+            --recipe-dir=packages/libtorrent/v${{ matrix.version }}
         shell: bash
 
       - run: rm ./output/bld/ ./output/src_cache/ -rf
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: "repo-${{ runner.arch }}"
-          path: ./output/
+          name: "conda-lt-${{ runner.os }}-${{ runner.arch }}-${{ matrix.version }}"
+          path: ./output/*/libtorrent-*.conda
+
+  build-repo:
+    name: build a repo
+    runs-on: "ubuntu-24.04"
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: conda-lt-*
+          path: output
+          merge-multiple: true
+
+      - uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2 # v2.1.0
+        with:
+          repo: prefix-dev/pixi
+          tag: "v0.46.0"
+
+      - run: |
+          pixi global install conda-index
+          conda-index --verbose --threads=4 output
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: "conda-lt-${{ runner.os }}-${{ runner.arch }}"
-          path: ./output/*/libtorrent-*.conda
+          name: "repo"
+          path: ./output/
 
   build-qb:
     name: Build qbittorrent
     needs:
+      - build-repo
       - build-lt
     runs-on: "${{ matrix.os }}"
     strategy:
@@ -67,7 +90,7 @@ jobs:
 
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: "repo-${{ runner.arch }}"
+          name: "repo"
           path: ./output/
 
       - run: |

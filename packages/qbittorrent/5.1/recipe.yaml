@@ -15,7 +15,7 @@ source:
   sha256: "ac54cd8b3c6035cfcd684be5afd0eccc8c5fbbc3008a9b6f9ba42f6ef91105af"
 
 build:
-  string: "lt${{ lt }}_${{ hash }}_1"
+  string: "lt${{ lt }}_1${{ hash }}_1"
   variant:
     down_prioritize_variant: ${{ 1 if lt == "1" else 0 }}
   script:
@@ -46,7 +46,7 @@ requirements:
     - openssl>=3.0.2
     - qt6-main 6.8.*
     - zlib>=1.2.11
-    - "libtorrent-static ${{ lt }}.* [build_number=10]"
+    - "libtorrent-static ${{ lt }}.*"
 
 tests:
   - script:
