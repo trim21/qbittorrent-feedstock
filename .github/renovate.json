@@ -8,18 +8,7 @@
     {
       "customType": "jsonata",
       "fileMatch": [
-        "^packages/libtorrent-static v1/recipe\\.yaml$"
-      ],
-      "fileFormat": "yaml",
-      "matchStrings": [
-        "[{'currentValue': context.version, 'packageName': 'arvidn/libtorrent'}]"
-      ],
-      "datasourceTemplate": "github-tags"
-    },
-    {
-      "customType": "jsonata",
-      "fileMatch": [
-        "^packages/libtorrent-static v2/recipe\\.yaml$"
+        "^packages/libtorrent-static .*/recipe\\.yaml$"
       ],
       "fileFormat": "yaml",
       "matchStrings": [
