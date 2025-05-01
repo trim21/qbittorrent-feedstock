@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/prefix-dev/recipe-format/schema.json
+
+schema_version: 1
+
+context:
+  name: qbittorrent-nox
+  version: '5.1.0'
+
+package:
+  name: "${{ name }}"
+  version: "${{ version }}"
+
+source:
+  url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
+  sha256: "ac54cd8b3c6035cfcd684be5afd0eccc8c5fbbc3008a9b6f9ba42f6ef91105af"
+
+build:
+  string: "lt${{ lt }}_${{ hash }}_2"
+  variant:
+    down_prioritize_variant: ${{ 1 if lt == "1" else 0 }}
+  script:
+    content:
+      # QT_REQUIRE_HOST_PATH_CHECK is currently required to use qt6-main on aarch64
+      # see https://github.com/conda-forge/qt-main-feedstock/issues/273 for more details
+      - |
+        cmake ${CMAKE_ARGS} \
+          -G "Ninja" \
+          -D QT_REQUIRE_HOST_PATH_CHECK=OFF \
+          -D TESTING=OFF \
+          -D GUI=OFF \
+          .
+
+      - ninja install
+
+requirements:
+  build:
+    - "${{ compiler('c') }}"
+    - if: linux
+      then: "${{ stdlib('c') }}"
+    - "${{ compiler('cxx') }}"
+    - ninja
+    - cmake
+
+  host:
+    - boost>=1.84.0
+    - openssl>=3.0.2
+    - qt6-main 6.8.*
+    - zlib>=1.2.11
+    - "libtorrent-static ${{ lt }}.*"
+
+tests:
+  - script:
+      - qbittorrent-nox --help
