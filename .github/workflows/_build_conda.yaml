@@ -60,8 +60,8 @@ jobs:
           tag: "v0.46.0"
 
       - run: |
-          pixi global install conda-index
-          conda-index --verbose --threads=4 output
+          pixi global install conda --with conda-index
+          conda index --verbose --threads=4 output
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
