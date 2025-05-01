@@ -62,6 +62,7 @@ jobs:
       - run: tree output
 
       - run: pixi global install conda --with conda-index
+      - run: which conda
       - run: conda index --verbose --threads=4 output
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
