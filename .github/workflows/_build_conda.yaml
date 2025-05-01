@@ -54,12 +54,14 @@ jobs:
           path: output
           merge-multiple: true
 
+      - run: tree output
+
+      - run: sudo rm /usr/bin/conda
+
       - uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2 # v2.1.0
         with:
           repo: prefix-dev/pixi
           tag: "v0.46.0"
-
-      - run: tree output
 
       - run: pixi global install conda --with conda-index
       - run: which conda
