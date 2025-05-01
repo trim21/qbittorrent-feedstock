@@ -3,5 +3,50 @@
   "extends": [
     "local>trim21/renovate-config",
     "local>trim21/renovate-config:app"
+  ],
+  "customManagers": [
+    {
+      "customType": "jsonata",
+      "fileMatch": [
+        "^packages/libtorrent-static v1/recipe\\.yaml$"
+      ],
+      "fileFormat": "yaml",
+      "matchStrings": [
+        "[{'currentValue': context.version, 'packageName': 'arvidn/libtorrent'}]"
+      ],
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "customType": "jsonata",
+      "fileMatch": [
+        "^packages/libtorrent-static v2/recipe\\.yaml$"
+      ],
+      "fileFormat": "yaml",
+      "matchStrings": [
+        "[{'currentValue': context.version, 'packageName': 'arvidn/libtorrent'}]"
+      ],
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "customType": "jsonata",
+      "fileMatch": [
+        "^recipe/recipe\\.yaml$"
+      ],
+      "fileFormat": "yaml",
+      "matchStrings": [
+        "[{'currentValue': context.version, 'packageName': 'qbittorrent/qBittorrent'}]"
+      ],
+      "extractVersionTemplate": "^release-(?<major>\\d+)(\\.(?<minor>\\d+))?(\\.(?<patch>\\d+))?(-(?<compatibility>.*))?$",
+      "datasourceTemplate": "github-tags"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchFileNames": [
+        "^packages/libtorrent-static v1/recipe\\.yaml$"
+      ],
+      "matchDepTypes":["major"],
+      "enabled":  false
+    }
   ]
 }
