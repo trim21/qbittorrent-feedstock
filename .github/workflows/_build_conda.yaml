@@ -42,7 +42,6 @@ jobs:
             --channel=conda-forge \
             --channel=https://repo.prefix.dev/bit-torrent \
             --verbose \
-            -m=variants.yaml \
             --recipe-dir=packages/qbittorrent
         shell: bash
 
