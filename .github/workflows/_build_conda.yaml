@@ -30,7 +30,7 @@ jobs:
             --channel=conda-forge \
             --channel=https://repo.prefix.dev/bit-torrent \
             --verbose \
-            --recipe-dir=packages/libtorrent-static
+            --recipe-dir=packages
         shell: bash
 
       - run: |

@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+# yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/prefix-dev/recipe-format/schema.json
 
 schema_version: 1
 
@@ -16,6 +16,9 @@ source:
 
 build:
   number: 1
+  string: "lt${{ lt }}_${{ hash }}_${{ build_number }}"
+  variant:
+    down_prioritize_variant: ${{ 1 if lt == "1" else 0 }}
   script:
     content:
       # QT_REQUIRE_HOST_PATH_CHECK is currently required to use qt6-main on aarch64
@@ -43,7 +46,7 @@ requirements:
     - openssl>=3.0.2
     - qt6-main 6.8.*
     - zlib>=1.2.11
-    - libtorrent-static
+    - "libtorrent-static ${{ lt }}.*"
 
 tests:
   - script:
