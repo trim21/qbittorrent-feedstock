@@ -15,7 +15,7 @@ source:
   sha256: ccbf8e8c21dc81635de95166b498922b4725f9725a23b2cfe2a6b2fead6fb9fc
 
 build:
-  number: 0
+  number: 1
   script:
     content:
       - |
