@@ -13,10 +13,10 @@ jobs:
           - "ubuntu-24.04"
           - "ubuntu-24.04-arm"
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@v4
 
       - name: Install the latest Wasmer version
-        uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2 # v2.1.0
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
         with:
           repo: prefix-dev/rattler-build
           tag: "v0.41.0"
@@ -47,7 +47,7 @@ jobs:
 
       - run: ls ./output/
 
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@v4
         with:
           name: "conda-${{ runner.os }}-${{ runner.arch }}"
           path: ./output/*/*.conda
