@@ -42,8 +42,8 @@
   ],
   "packageRules": [
     {
-      "matchFileNames": [
-        "^packages/libtorrent-static v1/recipe\\.yaml$"
+      "matchPackageNames": [
+        "arvidn/libtorrent"
       ],
       "matchUpdateTypes": [
         "major"
