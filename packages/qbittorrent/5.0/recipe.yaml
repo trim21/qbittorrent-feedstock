@@ -35,8 +35,6 @@ build:
 requirements:
   build:
     - "${{ compiler('c') }}"
-    - if: linux
-      then: "${{ stdlib('c') }}"
     - "${{ compiler('cxx') }}"
     - ninja
     - cmake
