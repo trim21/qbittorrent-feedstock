@@ -59,6 +59,8 @@ jobs:
           repo: prefix-dev/pixi
           tag: "v0.46.0"
 
+      - run: tree output
+
       - run: pixi global install conda --with conda-index
       - run: conda index --verbose --threads=4 output
 
