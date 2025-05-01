@@ -14,7 +14,7 @@ source:
   sha256: 79b030565fa392a6bc267b24f538d7b8e762f607ee734b3d459b19c61c168b73
 
 build:
-  number: 0
+  number: 2
   string: "lt${{ lt }}_${{ hash }}_${{ build_number }}"
   variant:
     down_prioritize_variant: ${{ 1 if lt == "1" else 0 }}
