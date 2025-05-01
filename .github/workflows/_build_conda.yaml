@@ -54,7 +54,7 @@ jobs:
           path: output
           merge-multiple: true
 
-      - run: tree output
+      - run: mkdir -p output
 
       - run: sudo rm /usr/bin/conda
 
