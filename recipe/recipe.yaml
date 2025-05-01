@@ -14,7 +14,6 @@ source:
   sha256: '${{ qb_tarbar_sha256 }}'
 
 build:
-  number: 2
   string: "lt${{ lt }}_${{ hash }}_2"
   variant:
     down_prioritize_variant: ${{ 1 if lt == "1" else 0 }}
@@ -22,14 +21,7 @@ build:
     content:
       # QT_REQUIRE_HOST_PATH_CHECK is currently required to use qt6-main on aarch64
       # see https://github.com/conda-forge/qt-main-feedstock/issues/273 for more details
-      - |
-        cmake ${CMAKE_ARGS} \
-          -G "Ninja" \
-          -D QT_REQUIRE_HOST_PATH_CHECK=OFF \
-          -D TESTING=OFF \
-          -D GUI=OFF \
-          .
-
+      - cmake ${CMAKE_ARGS} -G "Ninja" -D QT_REQUIRE_HOST_PATH_CHECK=OFF -D TESTING=OFF -D GUI=OFF .
       - ninja install
 
 requirements:
