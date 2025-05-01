@@ -4,7 +4,7 @@ schema_version: 1
 
 context:
   name: qbittorrent-nox
-  version: "5.0.5"
+  version: '5.1.0'
 
 package:
   name: "${{ name }}"
@@ -12,11 +12,10 @@ package:
 
 source:
   url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
-  sha256: 79b030565fa392a6bc267b24f538d7b8e762f607ee734b3d459b19c61c168b73
+  sha256: "ac54cd8b3c6035cfcd684be5afd0eccc8c5fbbc3008a9b6f9ba42f6ef91105af"
 
 build:
-  number: 0
-  string: "lt${{ lt }}_${{ hash }}_${{ build_number }}"
+  string: "lt${{ lt }}_${{ hash }}_1"
   variant:
     down_prioritize_variant: ${{ 1 if lt == "1" else 0 }}
   script:
@@ -36,7 +35,8 @@ build:
 requirements:
   build:
     - "${{ compiler('c') }}"
-    - "${{ stdlib('c') }}"
+    - if: linux
+      then: "${{ stdlib('c') }}"
     - "${{ compiler('cxx') }}"
     - ninja
     - cmake
