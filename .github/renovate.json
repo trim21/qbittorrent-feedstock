@@ -8,7 +8,7 @@
     {
       "customType": "jsonata",
       "fileMatch": [
-        "^packages/libtorrent/recipe\\.yaml$"
+        "^packages/libtorrent/.*/recipe\\.yaml$"
       ],
       "fileFormat": "yaml",
       "matchStrings": [
@@ -19,7 +19,7 @@
     {
       "customType": "jsonata",
       "fileMatch": [
-        "^packages/qbittorrent/recipe\\.yaml$"
+        "^packages/qbittorrent/.*/recipe\\.yaml$"
       ],
       "fileFormat": "yaml",
       "matchStrings": [
