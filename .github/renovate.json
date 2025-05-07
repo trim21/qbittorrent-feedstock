@@ -7,8 +7,8 @@
   "customManagers": [
     {
       "customType": "jsonata",
-      "fileMatch": [
-        "^packages/libtorrent/.*/recipe\\.yaml$"
+      "managerFilePatterns": [
+        "packages/libtorrent/*/recipe.yaml"
       ],
       "fileFormat": "yaml",
       "matchStrings": [
@@ -18,8 +18,8 @@
     },
     {
       "customType": "jsonata",
-      "fileMatch": [
-        "^packages/qbittorrent/.*/recipe\\.yaml$"
+      "managerFilePatterns": [
+        "packages/qbittorrent/*/recipe.yaml"
       ],
       "fileFormat": "yaml",
       "matchStrings": [
