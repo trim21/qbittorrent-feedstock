@@ -4,7 +4,7 @@ schema_version: 1
 
 context:
   name: qbittorrent-nox
-  version: '5.1.1'
+  version: '5.1.2'
 
 package:
   name: "${{ name }}"
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${{ version }}.tar.gz
-  sha256: "09edaf7b0277c46f6653faed362e62d3daab5fdbeb3e15fb95493756e05e7a44"
+  sha256: "a35448f3c8cb57d033bd3c4bd66c63417b0ca793ae7e9c5c5053960e2229ad9e"
 
 build:
   string: "lt${{ lt }}_${{ hash }}_0"
