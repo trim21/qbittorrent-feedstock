@@ -4,6 +4,7 @@
     "local>trim21/renovate-config",
     "local>trim21/renovate-config:app"
   ],
+  "separateMinorPatch": true,
   "customManagers": [
     {
       "customType": "jsonata",
