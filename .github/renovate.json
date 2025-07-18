@@ -33,6 +33,7 @@
   "packageRules": [
     {
       "matchPackageNames": [
+        "qbittorrent/qBittorrent",
         "arvidn/libtorrent"
       ],
       "matchUpdateTypes": [
