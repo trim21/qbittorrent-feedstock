@@ -15,7 +15,7 @@ source:
   sha256: "a35448f3c8cb57d033bd3c4bd66c63417b0ca793ae7e9c5c5053960e2229ad9e"
 
 build:
-  string: "lt${{ lt }}_${{ hash }}_0"
+  string: "lt${{ lt }}_${{ hash }}_1"
   variant:
     down_prioritize_variant: ${{ 1 if lt == "1" else 0 }}
   script:
