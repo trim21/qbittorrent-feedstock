@@ -8,6 +8,7 @@ jobs:
     name: Build libtorrent
     runs-on: "${{ matrix.os }}"
     strategy:
+      fail-fast: false
       matrix:
         version:
           - "1"
@@ -76,6 +77,7 @@ jobs:
       - build-repo
     runs-on: "${{ matrix.os }}"
     strategy:
+      fail-fast: false
       matrix:
         version:
           - "5.0"
