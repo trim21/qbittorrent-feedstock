@@ -52,3 +52,4 @@ requirements:
 tests:
   - script:
       - qbittorrent-nox --help
+
