@@ -13,7 +13,6 @@ package:
 source:
   git: https://github.com/qbittorrent/qBittorrent.git
   tag: "release-${{ version }}"
-  depth: 1
 
 build:
   string: "lt${{ lt }}_${{ hash }}_1"
@@ -53,6 +52,7 @@ requirements:
 tests:
   - script:
       - qbittorrent-nox --help
+
 
 
 
