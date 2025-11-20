@@ -45,13 +45,14 @@ requirements:
   host:
     - boost>=1.84.0
     - openssl>=3.0.2
-    - qt6-main 6.8.*
+    - qt6-main 6.9.*
     - zlib>=1.2.11
     - "libtorrent-static ${{ lt }}.*"
 
 tests:
   - script:
       - qbittorrent-nox --help
+
 
 
 
