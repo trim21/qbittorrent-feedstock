@@ -38,7 +38,7 @@ jobs:
 
       - run: rm ./output/bld/ ./output/src_cache/ -rf
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: "conda-lt-${{ runner.os }}-${{ runner.arch }}-${{ matrix.version }}"
           path: ./output/*/libtorrent-*.conda
@@ -66,7 +66,7 @@ jobs:
       - run: pixi global install conda --with conda-index
       - run: conda index --verbose --threads=4 output
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: "repo"
           path: ./output/
@@ -112,7 +112,7 @@ jobs:
 
       - run: ls ./output/
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: "conda-qb-${{ runner.os }}-${{ runner.arch }}-${{ strategy.job-index }}"
           path: ./output/*/qbittorrent-*.conda
