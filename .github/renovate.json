@@ -42,7 +42,7 @@
     },
     {
       "matchPackageNames": [
-        "qbittorrent/qBittorrent",
+        "qbittorrent/qBittorrent"
       ],
       "matchUpdateTypes": [
         "major",
@@ -50,5 +50,10 @@
       ],
       "enabled": false
     }
-  ]
+  ],
+  "labels": [
+    "ci:auto-merge",
+    "dependencies"
+  ],
+  "prConcurrentLimit": 3
 }
