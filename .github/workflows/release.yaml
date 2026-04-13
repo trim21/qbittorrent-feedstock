@@ -33,7 +33,7 @@ jobs:
       - uses: jaxxstorm/action-install-gh-release@25e24d2d23ae098373794ef1d6faecb48ee52da8 # v3.0.0
         with:
           repo: prefix-dev/rattler-build
-          tag: "v0.61.4"
+          tag: "v0.62.0"
 
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
